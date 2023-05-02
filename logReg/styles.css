@@ -5,7 +5,7 @@ body{
     line-height: 1.7;
     color: #74C365;
     background-color: #1f2029;
-    background-image: url("src/assets/jungle.jpg");
+    background-image: url("../src/assets/jungle.jpg");
     background-size: cover;
 }
 
