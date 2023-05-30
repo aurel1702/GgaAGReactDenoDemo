@@ -24,7 +24,7 @@ function App () {
                 )
             case AppViews.mainPage:
                 return (
-                    <MainPage/>
+                    <LoginPage supabase={supabase}/>
                 )
         }
     }

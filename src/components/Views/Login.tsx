@@ -30,8 +30,8 @@ const LoginPage: React.FC<LoginProps> = ({supabase}) => {
     const registerUser = async (email, password) => {
         try {
             const { user, error } = await supabase.auth.signUp({
-                email: 'admin@admin.com',
-                password: 'AdminAdminAdmin',
+                email: email,
+                password: password,
             })
 
             // Registration successful
