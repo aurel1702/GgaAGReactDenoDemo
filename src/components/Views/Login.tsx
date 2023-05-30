@@ -7,39 +7,62 @@ interface LoginProps {
 }
 const LoginPage: React.FC<LoginProps> = ({supabase}) => {
     const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const handleLogin = async (email) => {
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    };
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        registerUser(email, password);
+    };
+
+    const registerUser = async (email, password) => {
         try {
-            // signIn is not a funcion
-            const { error } = await supabase.auth.signIn({ email });
-            if (error) throw error;
-            alert('Check your email for the login link!');
+            const { user, error } = await supabase.auth.signUp({
+                email: email,
+                password: password,
+            });
+
+            if (error) {
+                throw error;
+            }
+
+            // Registration successful
+            console.log('User registered:', user);
         } catch (error) {
-            alert(error.error_description || error.message);
+            console.error('Registration error:', error.message);
         }
     };
 
+
+
+    const loginUser = async (email:string, password:string) => {
+        const { user, error } = await supabase.auth.signIn({ email, password });
+        if (error) {
+            // Handle login error
+        } else {
+            // User logged in successfully
+        }
+    };
+
+
     return (
-        <div className='container mx-auto grid place-content-center min-h-screen'>
-            <p className='mb-4'>Sign in via magic link with your email below</p>
-            <input
-                className='mb-4 border-2 border-gray-500 rounded-xl p-4 w-full'
-                type='email'
-                placeholder='Your email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <button
-                onClick={(e) => {
-                    e.preventDefault();
-                    handleLogin(email);
-                }}
-                className='w-full mt-4 p-2 pl-5 pr-5 bg-blue-500 text-gray-100 text-lg rounded-lg focus:border-4 border-blue-300'
-            >
-                <span>Send magic link</span>
-            </button>
+        <div>
+            <h1>Register User</h1>
+            <form onSubmit={handleSubmit}>
+                <input type="email" placeholder="Email" value={email} onChange={handleEmailChange} />
+                <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+                <button type="submit">Register</button>
+            </form>
         </div>
     );
+
 }
 
 export default LoginPage;
