@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import "./Style.css"
+import "./Style.css";
 
 const  HEIGHT = 10;
 const  WIDTH  = 10;
@@ -87,7 +87,11 @@ class App extends Component {
 
     update() {
         let newRows = emptyRows();
-        this.state.snake.forEach(element => newRows[element.x][element.y] = 'snake')
+        // this.state.snake.forEach(element => newRows[element.x][element.y] = 'snake')
+        for (let i=0; i <this.state.snake.length; i++) {
+            newRows[this.state.snake[i].x][this.state.snake[i].y] = 'snake';
+        }
+        newRows[this.state.snake[this.state.snake.length-1].x][[this.state.snake[this.state.snake.length-1].y]] = 'snakeHead';
         newRows[this.state.food.x][this.state.food.y] = 'food';
         this.setState({rows: newRows});
     }

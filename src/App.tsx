@@ -33,8 +33,8 @@ function App () {
 
     return (
         <div>
-            {/*<Snake/>  gute ui -> kommentieren und entkommentieren  */}
-            {renderSelectedView()}
+            <Snake/>
+            {/*{renderSelectedView()}*/}
         </div>
     );
 }
