@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "@supabase/supabase-js";
 import {SupabaseClient} from "@supabase/supabase-js";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
+import {ThemeSupa} from "@supabase/auth-ui-shared";
+import {Auth} from "@supabase/auth-ui-react";
 
 interface LoginProps {
     supabase:SupabaseClient;
@@ -21,36 +21,48 @@ const LoginPage: React.FC<LoginProps> = ({supabase}) => {
         setPassword(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmitR = (e) => {
         e.preventDefault();
-        console.log(email,password);
         registerUser(email, password);
+    };
+
+    const handleSubmitL = (e) => {
+        e.preventDefault();
+        signInWithEmail(email, password);
     };
 
     const registerUser = async (email, password) => {
         try {
-            const { user, error } = await supabase.auth.signUp({
+            const { data, error } = await supabase.auth.signUp({
                 email: email,
                 password: password,
             })
 
-            // Registration successful
-            console.log('User registered:', user.id);
-            setUser(user);
+            setSession(data.session);
+            setUser(data.user);
         } catch (error) {
             console.error('Registration error:', error.message);
         }
     };
 
-    async function signInWithEmail() {
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email: email,
-            password: password,
-        })
+    const signInWithEmail = async (email,password) => {
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: password,
+            })
+
+            setSession(data.session);
+            setUser(data.user);
+            console.log(data);
+        } catch (error) {
+            console.error('Registration error:', error.message);
+        }
     }
 
-    async function signOut() {
+    const signOut = async () => {
         const { error } = await supabase.auth.signOut()
+
     }
 
     useEffect(() => {
@@ -70,9 +82,30 @@ const LoginPage: React.FC<LoginProps> = ({supabase}) => {
 
     if (!session) {
         return (
-            <div>
+            <div>//TODO CHOOSE UNCOMMENTED CODE</div>
+        );
+    } else {
+        return <div>Logged in!
+            <button onClick={() => signOut()} type="submit">Signout</button>
+        </div>;
+    }
+};
+
+export default LoginPage;
+
+/*
+
+<Auth
+                supabaseClient={supabase}
+                appearance={{ theme: ThemeSupa }}
+                providers={['email']}
+                theme="dark"
+            />
+
+
+        <div>
                 <h1>Register User</h1>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmitR}>
                     <input
                         type="email"
                         placeholder="Email"
@@ -87,20 +120,22 @@ const LoginPage: React.FC<LoginProps> = ({supabase}) => {
                     />
                     <button type="submit">Register</button>
                 </form>
+
+                <h1>Login User</h1>
+                <form onSubmit={handleSubmitL}>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={handleEmailChange}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                    />
+                    <button type="submit">Login</button>
+                </form>
             </div>
-        );
-    } else {
-        return <div>Logged in!</div>;
-    }
-};
-
-export default LoginPage;
-
-/*
-<Auth
-            supabaseClient={supabase}
-            appearance={{ theme: ThemeSupa }}
-            providers={['google']}
-            theme="dark"
-        />
  */
