@@ -13,28 +13,27 @@ export enum AppViews {
     logReg,
     mainPage
 }
-function App () {
-    const [selectedView, setSelectedView] = useState<AppViews>(AppViews.mainPage);
 
+function App () {
+    const [selectedView, setSelectedView] = useState<AppViews>(AppViews.logReg);
 
     const renderSelectedView = ():ReactNode => {
         switch(selectedView){
             case AppViews.logReg:
                 return (
-                    <LogReg/>
+                    <LoginPage supabase={supabase}/>
 
                 )
             case AppViews.mainPage:
                 return (
-                    <LoginPage supabase={supabase}/>
-                )
+                    <MainPage></MainPage>
+            )
         }
     }
 
     return (
         <div>
-            <Snake/>
-            {/*{renderSelectedView()}*/}
+            {renderSelectedView()}
         </div>
     );
 }

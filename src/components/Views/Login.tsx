@@ -3,9 +3,11 @@ import "@supabase/supabase-js";
 import {SupabaseClient} from "@supabase/supabase-js";
 import {ThemeSupa} from "@supabase/auth-ui-shared";
 import {Auth} from "@supabase/auth-ui-react";
+import Snake from "../../games/Snake.tsx";
+import {AppViews} from "../../App.tsx";
 
 interface LoginProps {
-    supabase:SupabaseClient;
+    supabase:SupabaseClient
 }
 const LoginPage: React.FC<LoginProps> = ({supabase}) => {
     const [email, setEmail] = useState('');
@@ -82,10 +84,45 @@ const LoginPage: React.FC<LoginProps> = ({supabase}) => {
 
     if (!session) {
         return (
-            <div>//TODO CHOOSE UNCOMMENTED CODE</div>
+            <div>
+                <h1>Register User</h1>
+                <form onSubmit={handleSubmitR}>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={handleEmailChange}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                    />
+                    <button type="submit">Register</button>
+                </form>
+
+                <h1>Login User</h1>
+                <form onSubmit={handleSubmitL}>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={handleEmailChange}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                    />
+                    <button type="submit">Login</button>
+                </form>
+            </div>
         );
     } else {
-        return <div>Logged in!
+        return <div>
+            <Snake></Snake>
             <button onClick={() => signOut()} type="submit">Signout</button>
         </div>;
     }
@@ -95,7 +132,7 @@ export default LoginPage;
 
 /*
 
-<Auth
+           <Auth
                 supabaseClient={supabase}
                 appearance={{ theme: ThemeSupa }}
                 providers={['email']}
