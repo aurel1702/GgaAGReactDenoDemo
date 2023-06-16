@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import "./Style.css";
+import "./style.css";
 
 const  HEIGHT = 10;
 const  WIDTH  = 10;
