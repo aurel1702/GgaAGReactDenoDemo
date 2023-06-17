@@ -49,8 +49,8 @@ class App extends Component {
     }
 
     moveSnake = () => {
-        let snakeCopy = [...this.state.snake];
-        let head  =  {...snakeCopy[snakeCopy.length-1]};
+        const snakeCopy = [...this.state.snake];
+        const head  =  {...snakeCopy[snakeCopy.length-1]};
         switch (this.state.direction) {
             case LEFT:  head.y += -1; break;
             case UP:    head.x += -1; break;
@@ -72,9 +72,9 @@ class App extends Component {
     }
 
     isEaten() {
-        let snakeCopy  = [...this.state.snake];
-        let head  =  {...snakeCopy[snakeCopy.length-1]};
-        let food = this.state.food;
+        const snakeCopy  = [...this.state.snake];
+        const head  =  {...snakeCopy[snakeCopy.length-1]};
+        const food = this.state.food;
         if ((head.x === food.x) &&(head.y === food.y)) {
             snakeCopy.push(head);
             this.setState({
@@ -86,7 +86,7 @@ class App extends Component {
     }
 
     update() {
-        let newRows = emptyRows();
+        const newRows = emptyRows();
         // this.state.snake.forEach(element => newRows[element.x][element.y] = 'snake')
         for (let i=0; i <this.state.snake.length; i++) {
             newRows[this.state.snake[i].x][this.state.snake[i].y] = 'snake';
@@ -97,8 +97,8 @@ class App extends Component {
     }
 
     isCollapsed = () => {
-        let snake = this.state.snake;
-        let head  = {...snake[snake.length-1]}
+        const snake = this.state.snake;
+        const head  = {...snake[snake.length-1]}
         for (let i=0; i<snake.length-3; i++) {
             if ((head.x === snake[i].x) &&(head.y === snake[i].y)) {
                 this.setState(initialState);
@@ -136,11 +136,11 @@ class App extends Component {
     render() {
         const displayRows = this.state.rows.map((row, i) => row.map((value, j) =>  <div name={`${i}=${j}`} className={value} />))
         return (
-            <div className="a">
+            <>
                 <div className="snake-container">
                     <div className="grid">{displayRows}</div>
                 </div>
-            </div>
+            </>
         )
     }
 }

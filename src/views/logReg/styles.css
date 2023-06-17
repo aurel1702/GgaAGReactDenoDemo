@@ -4,12 +4,15 @@ body{
     font-weight: 300;
     line-height: 1.7;
     color: #74C365;
-    background-color: #1f2029;
+    background-color: #000000;
     background-image: url("../../assets/jungle.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
+
 }
 
-a:hover {
+button:hover {
     text-decoration: none;
 }
 .link {
@@ -39,6 +42,7 @@ h4 {
 h6 span{
     padding: 20px;
     font-weight: 700;
+    font-size: 20px;
 
 }
 .section{
@@ -171,12 +175,11 @@ h6 span{
     -webkit-transition: all 200ms linear;
     transition: all 200ms linear;
 }
-.btn{
+.btnA{
     border-radius: 4px;
     height: 44px;
     font-size: 13px;
     font-weight: 600;
-    text-transform: uppercase;
     -webkit-transition : all 200ms linear;
     transition: all 200ms linear;
     padding: 0 30px;

@@ -7,9 +7,16 @@
     flexWrap: wrap;
 
 }
+
+body{
+    background-image: url("../../assets/jungle.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .snake-container {
-    width: 100vw;
-    height: 100vh;
+    padding-top: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,14 +30,14 @@
     flex-wrap: wrap;
 }
 .grid-item {
-    outline: 1px solid grey;
+    outline: 0.13em solid #090909;
     width: 50px;
     height: 50px;
 }
 
 .snake {
-    outline: 1px solid green;
-    background-color: yellow;
+    outline: 1px solid rgba(7, 27, 103, 0.66);
+    background-color: rgba(7, 27, 103, 0.66);
 
     width: 50px;
     height: 50px;
@@ -38,17 +45,16 @@
 
 
 .food {
-    outline: 3px solid red;
-    background-image: url("res/apfel.png");
-    background-size: 37px;  /* haha */
+    outline: 0.1em yellow;
+    background-image: url("../../assets/banana.png");
+    background-size: 49px;
     width: 50px;
     height: 50px;
 
 }
-
 .snakeHead {
-    outline: 1px solid brown;
-    background-image: url("res/bana.png");
+    outline: 1px solid rgba(7, 27, 103, 0.66);
+    background-image: url("../../assets/monkey.png");
     background-size: cover;
 
     width: 50px;
